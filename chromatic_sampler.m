@@ -4,7 +4,8 @@
 T = 10000;
 burnin = 500;
 
-alldata = xlsread('DataFiles/ChromeProbsFeb4.xlsx');
+% INSERT DATA FILE HERE
+alldata = xlsread('DataFiles/ChromeProbsFeb11.xlsx');
 alldata = alldata(:,1:9); % delete any notes to the sides
 alldata(isnan(alldata)) = 0; % replace all NaNs with 0s
 

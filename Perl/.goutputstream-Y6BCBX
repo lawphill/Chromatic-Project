@@ -1,0 +1,11 @@
+#! usr/bin/perl
+
+$file = "../ChromeProbsFeb4.csv";
+
+open(IN,"<$file") or die ("Couldn't open input file\n");
+@alldata = <IN>;
+close(IN);
+
+for(i=2;$i<@alldata;$i++){ # skip first two header lines
+	@line = split(",",$alldata[$i]);
+}

@@ -18,13 +18,13 @@ chi2hist = sum(sum((O-E).^2 ./ E));
 s = size(E);
 dfhist = (s(1)-1)*(s(2)-1);
 
-phist = chi2pdf(chi2hist,dfhist);
+phist = 1 - chi2cdf(chi2hist,dfhist);
 
 % calculate Yates correction
 
 chi2Yates = sum(sum((abs(O-E)-.5) .^ 2 ./ E));
 
-pYates = chi2pdf(chi2Yates,dfhist);
+pYates = 1 - chi2cdf(chi2Yates,dfhist);
 
 clearvars nulls;
 
@@ -37,7 +37,7 @@ sumsE = sums_exp/sum(sums_exp) * sum(sum(data(:,7:9)));
 chi2sums = sum(sum((sumsO-sumsE).^2 ./ sumsE));
 dfsums = sum(size(sumsE)) - 2;
 
-psums = chi2pdf(chi2sums,dfsums);
+psums = 1 - chi2cdf(chi2sums,dfsums);
 
 % Chi-square for pure color, 2 colors, 3 colors
 
@@ -53,7 +53,7 @@ colorsE = colorsE / sum(colorsE) * sum(colorsO);
 chi2colors = sum(sum((colorsO-colorsE).^2 ./ colorsE));
 dfcolors = sum(size(colorsE)) - 2;
 
-pcolors = chi2pdf(chi2colors,dfcolors);
+pcolors = 1 - chi2cdf(chi2colors,dfcolors);
 
 % Put all relevant info in single datastruct
 

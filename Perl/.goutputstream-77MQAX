@@ -1,0 +1,17 @@
+#! usr/bin/perl
+
+$file = "../ChromeProbsFeb4.csv";
+
+open(IN,"<$file") or die ("Couldn't open input file\n");
+@alldata = <IN>;
+close(IN);
+
+%stats; %oldcolors; %newcolors;
+for($i=2;$i<@alldata;$i++){ # skip first two header lines
+	@line = split(",",$alldata[$i]);
+	@{$stats{$i}} = splice(@line,0,3);
+	@{$oldcolors{$i}} = splice(@line,3,3);
+	@{$newcolors{$i}} = splice(@line,6,3);
+}
+
+undef($i); undef(@line); undef(@alldata);
