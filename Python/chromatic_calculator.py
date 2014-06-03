@@ -25,7 +25,7 @@ def get_desired():
     return [int(i) for i in sockets]  
 
 # Grab our input
-x = 12
+x = 13
 
 current = [0,0,0]
 desired = [0,0,0]

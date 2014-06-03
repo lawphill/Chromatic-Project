@@ -1,0 +1,30 @@
+Chromatic Orb Project Status
+----------------------------
+
+Python code
+-----------
+The Python code is the only area of the project currently being worked on. The relevant file is 'exactChrome.py'. The basis of this file is the ExactChrom.m script written by /u/MantisPrayingMantis. It currently implements a wide-range of functionality. It takes a particular value of X (default is 13) and a list of the form [#red, #green, #blue] to describe the setup of the item you desire. It also takes another list of the form [Req_STR,Req_DEX,Req_INT] which describes the stat requirements of the item. It currently outputs the mean and median values for the number of chromatic orbs necessary. Uncommenting lines 122-124 will ask the user for a specific number of chromatic orbs, the script will then also output the probability of achieving the desired state within that set number of chromatics.
+
+Current work to do: Incorporate the current state of the item as this is relevant in some contexts. Let the user decide what percentile they want to specify, so that the script does not only calculate the median.
+
+Excel Spreadsheets
+------------------
+Currently there are two spreadsheets available.
+
+'ChromaticCalculatorBeta.xlsm' is a macro-enabled spreadsheet. The first page 'DataEntry' is the only page which the user needs to interact with, all other worksheets being either explanatory or making behind-the-scenes calculations. Under 'Desired Colors' one indicates the number of red, green, and blue sockets desired. Similarly, under 'Current Colors' indicate the number of red, green, and blue sockets the item currently has. Under 'Stat requirements', enter the requirements listed for your item. Be careful that you enter the number listed on the item and NOT the stat requirements for the base item type. It has been confirmed that the mods which affect stat requirements do influence the behavior of chromatic orbs.
+
+The worksheet is designed to make two calculations. Under 'Single-Value Analysis' one can enter a single value for 'X'. This defaults currently to '13'. This value is used to calculate the probability that you'll get your item for a set number of chromatics orbs ranging from 1 to 5000. A macro enables the spreadsheet to take into account the fact that we don't know the true value of X. We can estimate how likely different values of X are from the MATLAB data. This is included in the spreadsheet and when you click the "Calculate" button it runs a macro which calculates the probabilities for each value of X and then averages over them in order to give a potentially better estimate.
+
+'ChromaticCalculatorNoMacro.xlsx' is a macro-less spreadsheet. It implements the same single-value analysis as in the macro-enabled spreadsheet, but does not contain a multi-value analysis.
+
+MATLAB code
+-----------
+The MATLAB code has mostly been abandoned in favor of the Python implementation. Currently, the MATLAB code should only be used in order to create an estimate of the value of X. To do this, follow these steps:
+
+1) Go to https://docs.google.com/spreadsheet/ccc?key=0Ao1EUzXFpy4ldE00SWgwQVJhU0phX2dFdER2Z0FlTnc&usp=drive_web#gid=0 in order to get the most up-to-date data from the Chromatic Orb community log. Download the log as .xlsx and merge the two tabs 'Post 1.1 data' and 'Pre 1.1 data' so that all data points are aligned in the same columns.
+
+2) Open MATLAB and edit the chromatic_sampler.m file. Change the name of the file that xlsread takes to match the name of your downloaded data file. Chromatic_sampler currently runs properly on with 1 chain, but has not been tested fully for multiple chains. Be warned that because of the nature of the sampling algorithm, this process may take some time.
+
+3) Once the algorithm is finished, the results are stored in the variable 'd'. In particular, d.mean represents the best estimate of the parameter 'X'.
+
+All other MATLAB code is in a general beta state and is unlikely to be updated in the future. Of note are the files 'expected_chromes.m' which creates a sample of data assuming that the value we find of X is accurate and 'ChromeChiSquare.m' which compares the actual data to this simulated data in a number of ways.

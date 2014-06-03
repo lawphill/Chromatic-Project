@@ -1,13 +1,13 @@
 %% Chromatic Sampler
 % A Metropolis-Hastings sampler to sample the value of X
 
-T = 10000;
-burnin = 500;
+T = 1000;
+burnin = 100;
 %burnin=0;
 nchains = 1;
 
 % INSERT DATA FILE HERE
-alldata = xlsread('DataFiles/ChromeProbsMar31.xlsx');
+alldata = xlsread('DataFiles/ChromeProbsJune2.xlsx');
 alldata = alldata(:,1:9); % delete any notes to the sides
 alldata(isnan(alldata)) = 0; % replace all NaNs with 0s
 
